@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 )
 
 const (
@@ -16,21 +17,13 @@ type TranslateResponse struct {
 }
 
 func Translate(text string, token string) (string, error) {
-	client := &http.Client{}
+	values := url.Values{}
+	values.Add("appId", "Bearer "+token)
+	values.Add("text", text)
+	values.Add("from", "en")
+	values.Add("to", "ja")
 
-	req, err := http.NewRequest("GET", translate_url, nil)
-	if err != nil {
-		return "", err
-	}
-
-	q := req.URL.Query()
-	q.Add("appId", "Bearer "+token)
-	q.Add("text", text)
-	q.Add("from", "en")
-	q.Add("to", "ja")
-	req.URL.RawQuery = q.Encode()
-
-	resp, err := client.Do(req)
+	resp, err := http.Get(translate_url + "?" + values.Encode())
 	if err != nil {
 		return "", err
 	}
