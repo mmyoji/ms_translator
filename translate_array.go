@@ -3,7 +3,6 @@ package mstranslator
 import (
 	"bytes"
 	"encoding/xml"
-	"io/ioutil"
 	"net/http"
 	"strings"
 )
@@ -56,14 +55,10 @@ func TranslateArray(words []string, token string) ([]string, error) {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return results, err
-	}
-
 	data := &TranslateArrayResponseBody{}
+	decoder := xml.NewDecoder(resp.Body)
 
-	if err := xml.Unmarshal(body, data); err != nil {
+	if err := decoder.Decode(data); err != nil {
 		return results, err
 	}
 

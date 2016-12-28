@@ -2,7 +2,6 @@ package mstranslator
 
 import (
 	"encoding/xml"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 )
@@ -29,14 +28,10 @@ func Translate(text string, token string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
 	data := &TranslateResponse{}
+	decoder := xml.NewDecoder(resp.Body)
 
-	if err := xml.Unmarshal(body, data); err != nil {
+	if err := decoder.Decode(data); err != nil {
 		return "", err
 	}
 
