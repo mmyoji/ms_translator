@@ -12,29 +12,6 @@ const (
 	translate_array_url = "http://api.microsofttranslator.com/V2/Http.svc/TranslateArray"
 )
 
-// Sample Response Body
-// <ArrayOfTranslateArrayResponse xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-//   <TranslateArrayResponse>
-//     <From>en</From>
-//     <OriginalTextSentenceLengths xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-//       <a:int>3</a:int>
-//     </OriginalTextSentenceLengths>
-//     <TranslatedText>犬</TranslatedText>
-//     <TranslatedTextSentenceLengths xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-//       <a:int>1</a:int>
-//     </TranslatedTextSentenceLengths>
-//   </TranslateArrayResponse>
-//   <TranslateArrayResponse>
-//     <From>en</From>
-//     <OriginalTextSentenceLengths xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-//       <a:int>3</a:int>
-//     </OriginalTextSentenceLengths>
-//     <TranslatedText>猫</TranslatedText>
-//     <TranslatedTextSentenceLengths xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-//       <a:int>1</a:int>
-//     </TranslatedTextSentenceLengths>
-//   </TranslateArrayResponse>
-// </ArrayOfTranslateArrayResponse>
 type TranslateArrayResponse struct {
 	From string `xml:"From"`
 	Text string `xml:"TranslatedText"`
