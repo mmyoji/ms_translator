@@ -1,4 +1,4 @@
-package ms_translator
+package mstranslator
 
 import (
 	"bytes"
